@@ -18,16 +18,12 @@ import {
 } from "./style";
 
 export default function EditProduct() {
-  const { products, handleUpdateProduct } = useProduct();
-
   const { params } = useRouteMatch();
+  const { products, handleUpdateProduct } = useProduct();
   const history = useHistory();
 
-  const filteredProduct = products.filter(
-    (product) => product.id === params.id
-  );
-  const product = filteredProduct[0];
-  console.log(product.category);
+  const foundedProduct = products.filter((product) => product.id === params.id);
+  const product = foundedProduct[0];
 
   const [tags, setTags] = useState(product.category);
   const [image, setImage] = useState();

@@ -27,7 +27,7 @@ export const Table = styled.table`
 
     p {
       max-width: 100%;
-      white-space: pre;
+      white-space: nowrap;
       overflow: hidden;
       text-overflow: ellipsis;
     }
@@ -111,9 +111,7 @@ export const ResponsiveTable = styled.div`
   @media screen and (max-width: 700px) {
     table {
       border-radius: 6px;
-      border: 1px solid var(--gray-200);
 
-      background: var(--white);
       padding: 0 0.8rem;
     }
 
@@ -133,10 +131,9 @@ export const ResponsiveTable = styled.div`
       display: flex;
       gap: 2rem;
       justify-content: space-between;
+      border: 1px solid var(--gray-100);
 
-      border: none;
-      border-bottom: 1px solid var(--gray-100);
-      background: none;
+      background: var(--white);
 
       p {
         text-align: end;
@@ -145,17 +142,16 @@ export const ResponsiveTable = styled.div`
       }
 
       &:first-child {
+        border-radius: 6px 6px 0 0;
         height: 200px;
         max-height: 200px;
 
-        border-left: none;
-        border-radius: 0px;
         gap: 0;
 
         justify-content: center;
         align-items: center;
-
         img {
+          margin-top: 1.5rem;
           position: relative;
           bottom: 1rem;
           border-radius: 6px;
@@ -176,9 +172,7 @@ export const ResponsiveTable = styled.div`
 
         justify-content: center;
         align-items: center;
-        border: 0;
-        border-radius: 0;
-
+        border-radius: 0 0 6px 6px;
         margin-bottom: 2rem;
 
         svg {
@@ -194,16 +188,6 @@ export const ResponsiveTable = styled.div`
       font-weight: bold;
       text-transform: uppercase;
     }
-
-    table td:last-child {
-      border-bottom: 1px dashed var(--gray-700);
-    }
-
-    table tr:last-child {
-      td:last-child {
-        border: 0;
-      }
-    }
   }
 `;
 
@@ -211,7 +195,7 @@ export const TrashIcon = styled(FiTrash)`
   width: 1rem;
   height: 1rem;
 
-  @media (max-width: 600px) {
+  @media (max-width: 700px) {
     width: 1.5rem;
     height: 1.5rem;
   }
@@ -220,7 +204,7 @@ export const EditIcon = styled(FiEdit)`
   width: 1rem;
   height: 1rem;
 
-  @media (max-width: 600px) {
+  @media (max-width: 700px) {
     width: 1.5rem;
     height: 1.5rem;
   }

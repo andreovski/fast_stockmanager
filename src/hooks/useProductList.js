@@ -1,7 +1,6 @@
-import { createContext, useContext, useEffect, useState } from "react";
+import { createContext, useContext, useLayoutEffect, useState } from "react";
 import { useHistory } from "react-router";
-import { uuid } from "uuidv4";
-
+import { v4 as uuidv4 } from "uuid";
 import api from "../service/api";
 
 export const ProductsContext = createContext({});
@@ -11,7 +10,7 @@ export function ProductsProvider({ children }) {
 
   const history = useHistory();
 
-  useEffect(() => {
+  useLayoutEffect(() => {
     const response = async () => {
       await api.get("/products").then((res) => setProducts(res.data));
     };
@@ -22,7 +21,7 @@ export function ProductsProvider({ children }) {
   const handleAddProduct = async (productData) => {
     try {
       const response = await api.post("/products", {
-        id: uuid(),
+        id: uuidv4(),
         ...productData,
       });
 
@@ -42,7 +41,6 @@ export function ProductsProvider({ children }) {
       );
 
       updatedProduct.push(values);
-      console.log(updatedProduct);
 
       await api.put(`/products/${values.id}`, {
         ...values,
