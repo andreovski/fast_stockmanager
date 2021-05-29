@@ -25,7 +25,7 @@
 O servidor foi modificado para rodar na porta 3333, para alterar basta acessar executar.
 
 ```sh
-npm json-server -p (PORTA DESEJADA) server.json
+npm json-server -p PORTA DESEJADA server.json
 ```
 
 <h3>Aplicação</h3>
