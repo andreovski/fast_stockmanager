@@ -36,6 +36,7 @@ export default function CreateProduct() {
     width: "",
     length: "",
     weigth: "",
+    code: "",
     acquisition: "",
   };
 
@@ -72,6 +73,7 @@ export default function CreateProduct() {
       width: values.width,
       length: values.length,
       weigth: values.weigth,
+      code: values.code,
       acquisition: values.acquisition,
     };
 
@@ -181,6 +183,12 @@ export default function CreateProduct() {
                         labelhtmlFor="weigth"
                         typeInput="number"
                         note="KG"
+                      />
+                      <Input
+                        labelTitle="Código de barras"
+                        labelhtmlFor="code"
+                        typeInput="number"
+                        note="Numérico"
                       />
                       <Input
                         labelTitle="Data da aquisição"

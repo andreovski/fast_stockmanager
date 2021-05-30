@@ -25,6 +25,8 @@ export default function EditProduct() {
   const foundedProduct = products.filter((product) => product.id === params.id);
   const product = foundedProduct[0];
 
+  console.log(product);
+
   const [tags, setTags] = useState(product.category);
   const [image, setImage] = useState();
   const [convertedImage, setConvertedImage] = useState(product.image);
@@ -50,6 +52,7 @@ export default function EditProduct() {
     width: product.width,
     length: product.length,
     weigth: product.weigth,
+    code: product.code,
     acquisition: product.acquisition,
   };
 
@@ -77,6 +80,7 @@ export default function EditProduct() {
       width: values.width,
       length: values.length,
       weigth: values.weigth,
+      code: values.code,
       acquisition: values.acquisition,
     };
 
@@ -186,6 +190,12 @@ export default function EditProduct() {
                         labelhtmlFor="weigth"
                         typeInput="number"
                         note="KG"
+                      />
+                      <Input
+                        labelTitle="Código de barras"
+                        labelhtmlFor="code"
+                        typeInput="number"
+                        note="Numérico"
                       />
                       <Input
                         labelTitle="Data da aquisição"

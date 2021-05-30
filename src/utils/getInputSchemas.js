@@ -18,6 +18,9 @@ export default Yup.object().shape({
     .integer("O comprimento deve ser em centimetros.")
     .required("O comprimento é obrigatório"),
   weigth: Yup.number().required("O peso é obrigatório."),
+  code: Yup.number("O código deve ser numérico").required(
+    "O código do produto é obrigatório"
+  ),
   acquisition: Yup.date()
     .required("Insira uma data.")
     .max(new Date(), "Data deve ser inferior a data atual."),

@@ -19,8 +19,7 @@ export const Box = styled.div`
     padding: 0 0.5rem;
     margin-bottom: 1rem;
 
-    border: 1px solid
-      ${(props) => (props.hasError ? "var(--red)" : "var(--gray-100)")};
+    border: 1px solid var(--gray-100);
     background: var(--white);
     border-radius: 6px;
 
