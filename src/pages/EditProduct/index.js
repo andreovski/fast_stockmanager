@@ -25,8 +25,6 @@ export default function EditProduct() {
   const foundedProduct = products.filter((product) => product.id === params.id);
   const product = foundedProduct[0];
 
-  console.log(product);
-
   const [tags, setTags] = useState(product.category);
   const [image, setImage] = useState();
   const [convertedImage, setConvertedImage] = useState(product.image);

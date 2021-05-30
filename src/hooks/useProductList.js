@@ -1,4 +1,4 @@
-import { createContext, useContext, useLayoutEffect, useState } from "react";
+import { createContext, useContext, useEffect, useState } from "react";
 import { useHistory } from "react-router";
 import { v4 as uuidv4 } from "uuid";
 import api from "../service/api";
@@ -10,7 +10,7 @@ export function ProductsProvider({ children }) {
 
   const history = useHistory();
 
-  useLayoutEffect(() => {
+  useEffect(() => {
     const response = async () => {
       await api.get("/products").then((res) => setProducts(res.data));
     };
