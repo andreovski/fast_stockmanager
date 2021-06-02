@@ -16,20 +16,43 @@ import {
   TagInput,
   ImageContentInput,
 } from "./style";
+import api from "../../service/api";
 
 export default function EditProduct() {
   const { params } = useRouteMatch();
-  const { products, handleUpdateProduct } = useProduct();
+  const { handleUpdateProduct } = useProduct();
+
   const history = useHistory();
-
-  const foundedProduct = products.filter((product) => product.id === params.id);
-  const product = foundedProduct[0];
-
-  const [tags, setTags] = useState(product.category);
-  const [image, setImage] = useState();
-  const [convertedImage, setConvertedImage] = useState(product.image);
-
   const imageInputRef = useRef();
+
+  const [tags, setTags] = useState([]);
+  const [image, setImage] = useState("");
+  const [convertedImage, setConvertedImage] = useState("");
+  const [product, setProduct] = useState({
+    image: "",
+    name: "",
+    description: "",
+    category: "",
+    value: "",
+    height: "",
+    width: "",
+    length: "",
+    weigth: "",
+    code: "",
+    acquisition: "",
+  });
+
+  useEffect(() => {
+    const response = async () => {
+      const resp = await api.get(`products/${params.id}`);
+
+      setTags(resp.data.category);
+      setConvertedImage(resp.data.image);
+      setProduct(resp.data);
+    };
+
+    response();
+  }, []);
 
   useEffect(() => {
     if (image) {
@@ -42,16 +65,15 @@ export default function EditProduct() {
   }, [image]);
 
   const inputInitialValues = {
-    name: product.name,
-    description: product.description,
-    category: product.category,
-    value: product.value,
-    height: product.height,
-    width: product.width,
-    length: product.length,
-    weigth: product.weigth,
-    code: product.code,
-    acquisition: product.acquisition,
+    name: product.name ? product.name : "",
+    description: product.description ? product.description : "",
+    value: product.value ? product.value : "",
+    height: product.height ? product.height : "",
+    width: product.width ? product.width : "",
+    length: product.length ? product.length : "",
+    weigth: product.weigth ? product.weigth : "",
+    code: product.code ? product.code : "",
+    acquisition: product.acquisition ? product.acquisition : "",
   };
 
   function handleUploadImageButton(event) {
@@ -97,6 +119,7 @@ export default function EditProduct() {
               validationSchema={schema}
               onSubmit={handleSubmit}
               initialValues={inputInitialValues}
+              enableReinitialize={true}
             >
               {() => (
                 <Form>
@@ -112,11 +135,13 @@ export default function EditProduct() {
                       <label className="imageLabel" htmlFor="image" />
                       <div>
                         {convertedImage ? (
-                          <img
-                            src={convertedImage}
-                            alt="imagem"
-                            onClick={() => imageInputRef.current.click()}
-                          />
+                          <>
+                            <img
+                              src={convertedImage}
+                              alt="imagem"
+                              onClick={() => imageInputRef.current.click()}
+                            />
+                          </>
                         ) : (
                           <button onClick={handleUploadImageButton}>
                             Adicionar imagem

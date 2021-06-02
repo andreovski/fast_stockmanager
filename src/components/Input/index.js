@@ -7,19 +7,20 @@ export default function Input({
   typeInput,
   textArea,
   note,
+  ...rest
 }) {
   return (
     <Box>
       <label htmlFor={labelhtmlFor}>{labelTitle}</label>
       {textArea ? (
         <Separetor>
-          <Field as="textarea" type="text" name={labelhtmlFor} />
+          <Field as="textarea" type="text" name={labelhtmlFor} {...rest} />
           <ErrorMessage component="span" name={labelhtmlFor} />
         </Separetor>
       ) : (
         <>
           <p>{note}</p>
-          <Field type={typeInput} name={labelhtmlFor} />
+          <Field type={typeInput} name={labelhtmlFor} {...rest} />
           <ErrorMessage component="span" name={labelhtmlFor} />
         </>
       )}
