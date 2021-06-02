@@ -1,7 +1,8 @@
 import { Link } from "react-router-dom";
 import { useProduct } from "../../hooks/useProductList";
 
-import { Table, ResponsiveTable, TrashIcon, EditIcon } from "./style";
+import EmptyListImage from "../../assets/emptyStockList.svg";
+import { Table, ResponsiveTable, TrashIcon, EditIcon, SvgImage } from "./style";
 
 export default function ContentTable() {
   const { products, handleRemoveProduct } = useProduct();
@@ -14,6 +15,8 @@ export default function ContentTable() {
 
     return newValue;
   }
+
+  console.log(products);
 
   return (
     <>
@@ -70,6 +73,13 @@ export default function ContentTable() {
           </tbody>
         </Table>
       </ResponsiveTable>
+
+      {products <= 0 && (
+        <SvgImage>
+          <img src={EmptyListImage} alt="Lista vazia" />
+          <p>Por aqui está tudo limpo!</p>
+        </SvgImage>
+      )}
     </>
   );
 }

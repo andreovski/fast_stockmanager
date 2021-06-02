@@ -209,3 +209,37 @@ export const EditIcon = styled(FiEdit)`
     height: 1.5rem;
   }
 `;
+
+export const SvgImage = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  img {
+    order: 2;
+    width: 100%;
+    height: 100%;
+
+    max-width: 490px;
+    height: 490px;
+    filter: opacity(0.8);
+  }
+
+  p {
+    order: 1;
+    width: 250px;
+
+    text-align: right;
+    font-size: 2.5rem;
+    color: var(--gray-200);
+  }
+
+  @media (max-width: 700px) {
+    flex-direction: column;
+
+    p {
+      font-size: 2rem;
+      text-align: center;
+    }
+  }
+`;
