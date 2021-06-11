@@ -148,6 +148,7 @@ export default function CreateProduct() {
                           maxTags={6}
                           placeholder={"Tecle enter para inserir..."}
                           onChange={(newTags) => setTags(newTags)}
+                          name="tags"
                         />
                       </TagInput>
 

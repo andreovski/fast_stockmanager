@@ -1,4 +1,10 @@
-import { createContext, useContext, useEffect, useState } from "react";
+import {
+  createContext,
+  useCallback,
+  useContext,
+  useEffect,
+  useState,
+} from "react";
 import { useHistory } from "react-router";
 import { v4 as uuidv4 } from "uuid";
 import api from "../service/api";
@@ -18,7 +24,7 @@ export function ProductsProvider({ children }) {
     response();
   }, []);
 
-  const handleAddProduct = async (productData) => {
+  const handleAddProduct = useCallback(async (productData) => {
     try {
       const response = await api.post("/products", {
         id: uuidv4(),
@@ -31,9 +37,9 @@ export function ProductsProvider({ children }) {
     } catch {
       alert("Não foi possivel adicionar o produto.");
     }
-  };
+  }, []);
 
-  const handleUpdateProduct = async (values) => {
+  const handleUpdateProduct = useCallback(async (values) => {
     try {
       const getProducts = [...products];
       const updatedProduct = getProducts.filter(
@@ -50,9 +56,9 @@ export function ProductsProvider({ children }) {
       alert("erro ao adicionar o produto");
       history.push("/");
     }
-  };
+  }, []);
 
-  const handleRemoveProduct = async (id) => {
+  const handleRemoveProduct = useCallback(async (id) => {
     try {
       const newProductsData = products.filter((product) => product.id !== id);
 
@@ -61,7 +67,7 @@ export function ProductsProvider({ children }) {
     } catch {
       alert("Erro ao deletar produto!");
     }
-  };
+  }, []);
 
   return (
     <ProductsContext.Provider

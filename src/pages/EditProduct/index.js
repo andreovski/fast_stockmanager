@@ -16,11 +16,10 @@ import {
   TagInput,
   ImageContentInput,
 } from "./style";
-import api from "../../service/api";
 
 export default function EditProduct() {
   const { params } = useRouteMatch();
-  const { handleUpdateProduct } = useProduct();
+  const { products, handleUpdateProduct } = useProduct();
 
   const history = useHistory();
   const imageInputRef = useRef();
@@ -43,16 +42,15 @@ export default function EditProduct() {
   });
 
   useEffect(() => {
-    const response = async () => {
-      const resp = await api.get(`products/${params.id}`);
+    const filteredProduct = products.filter(
+      (product) => product.id === params.id
+    );
+    const product = filteredProduct[0];
 
-      setTags(resp.data.category);
-      setConvertedImage(resp.data.image);
-      setProduct(resp.data);
-    };
-
-    response();
-  }, []);
+    setProduct(product);
+    setConvertedImage(product?.image);
+    setTags(product?.category ? product.category : []);
+  }, [products]);
 
   useEffect(() => {
     if (image) {
@@ -65,15 +63,15 @@ export default function EditProduct() {
   }, [image]);
 
   const inputInitialValues = {
-    name: product.name ? product.name : "",
-    description: product.description ? product.description : "",
-    value: product.value ? product.value : "",
-    height: product.height ? product.height : "",
-    width: product.width ? product.width : "",
-    length: product.length ? product.length : "",
-    weigth: product.weigth ? product.weigth : "",
-    code: product.code ? product.code : "",
-    acquisition: product.acquisition ? product.acquisition : "",
+    name: product?.name ? product.name : "",
+    description: product?.description ? product.description : "",
+    value: product?.value ? product.value : "",
+    height: product?.height ? product.height : "",
+    width: product?.width ? product.width : "",
+    length: product?.length ? product.length : "",
+    weigth: product?.weigth ? product.weigth : "",
+    code: product?.code ? product.code : "",
+    acquisition: product?.acquisition ? product.acquisition : "",
   };
 
   function handleUploadImageButton(event) {
@@ -90,7 +88,7 @@ export default function EditProduct() {
 
   function handleSubmit(values) {
     const newValidatedValues = {
-      id: product.id,
+      id: products.id,
       image: convertedImage,
       name: values.name,
       description: values.description,
